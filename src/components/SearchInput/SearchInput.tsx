@@ -3,60 +3,39 @@ import { connect, useDispatch, ConnectedProps } from "react-redux";
 import { getData, getInput } from "../../actions/index";
 import axios from "axios";
 
-interface Genre {
-  id: number;
-  name: string;
-}
+export const SearchInput: React.FC<InputProps> = () => {
+    const dispatch = useDispatch();
 
-interface Video {
-  id: number;
-  artist: string;
-  title: string;
-  release_year: number;
-  genre_id: number;
-  image_url: string;
-}
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+            const response = await axios.get(
+            "https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json"
+            );
+            dispatch(getData(response.data));
+        } catch (err) {
+            console.log(err);
+        }
+        };
+        fetchData();
+    }, [dispatch]);
 
-interface IProps {
-  genres?: Genre[];
-  videos?: Video[];
-  input_value?: string;
-}
-
-export const SearchInput: React.FC<InputProps | IProps> = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json"
-        );
-        dispatch(getData(response.data));
-      } catch (err) {
-        console.log(err);
-      }
+    const passValue = (e: string) => {
+        dispatch(getInput(e));
     };
-    fetchData();
-  }, [dispatch]);
 
-  const passValue = (e: string) => {
-    dispatch(getInput(e));
-  };
-
-  return (
-    <div>
-      <input type="text" onChange={(e) => passValue(e.target.value)} />
-      <div>Search Input</div>
-    </div>
-  );
+    return (
+        <div>
+        <input type="text" onChange={(e) => passValue(e.target.value)} />
+        <div>Search Input</div>
+        </div>
+    );
 };
 
-function mapStateToProps(state: any) {
-  console.log(state.videoList.inputValue);
-  return {
-    genres: state.genreList
-  };
+const mapStateToProps = (state: any) => {
+    return {
+        inputValue: state.videoList.inputValue || []
+    };
 }
 
 const connector = connect(mapStateToProps);

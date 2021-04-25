@@ -11,7 +11,8 @@ export const videoList = (state = initialState, action: any) => {
 	case types.GET_DATA: {
 		return {
 			...state,
-            genreList: [...state.genreList, action.data]
+            genreList: [...state.genreList, action.data.genres],
+			videoList: [...state.videoList, action.data.videos]
 		};
 	}
 
