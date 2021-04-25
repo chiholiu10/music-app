@@ -1,7 +1,7 @@
 import './App.css';
 import { SearchInput } from './components/SearchInput/SearchInput';
 
-function App() {
+export const App = () => {
   return (
     <div className="App">
       <SearchInput/>

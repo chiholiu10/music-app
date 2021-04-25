@@ -1,8 +1,9 @@
-import { types } from "../actions/index";
+import { types } from "../actions";
 
 const initialState = {
 	genreList: [],
-	yearList: []
+    videoList: [],
+	inputValue: ""
 };
 
 export const videoList = (state = initialState, action: any) => {
@@ -10,23 +11,15 @@ export const videoList = (state = initialState, action: any) => {
 	case types.GET_DATA: {
 		return {
 			...state,
-            genreList: [], 
-            yearList: [],
-			catalogInfo: action.data
+            genreList: [...state.genreList, action.data]
 		};
 	}
 
-	case types.GET_GENRES: {
+	case types.GET_INPUT_VALUE: {
 		return {
 			...state,
-		};
-	}
-
-	case types.GET_RELEASED_YEAR: {
-		return {
-			...state,
-			currentIndex: action.index
-		};
+			inputValue: action.value
+		}
 	}
 
 	default: 

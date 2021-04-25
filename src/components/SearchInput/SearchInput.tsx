@@ -1,4 +1,6 @@
-import {useEffect, useState} from 'react';
+import React, {  useEffect } from 'react';
+import { connect, useDispatch, ConnectedProps } from "react-redux";
+import { getData, getInput } from "../../actions/index";
 import axios from 'axios';
 
 interface Genre {
@@ -6,57 +8,56 @@ interface Genre {
     name: string;
 }
 
-interface Videos {
-    artist: string;
-    genre_id: number;
+interface Video {
     id: number;
-    image_url: string;
-    release_year: number;
+    artist: string;
     title: string;
+    release_year: number;
+    genre_id: number;
+    image_url: string;
 }
 
-export const SearchInput = () => {
-    // eslint-disable-next-line
-    const [inputValue, setInputValue] = useState("");
-    const [videos, setVideos] = useState<Videos[]>([])
-    const passInput = (searchText: string) => {
-        setInputValue(String(searchText));
-    }
+interface IProps {
+    genres?: Genre[];
+    videos?: Video[];
+    input_value?: string;
+  }
+
+export const SearchInput: React.FC<InputProps | IProps> = () => {
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json');
-                setVideos(response.data.videos);
+                dispatch(getData(response.data));
             } catch (err) {
                 console.log(err)
             }
         }
         fetchData();
-    }, []);
+    }, [dispatch]);
 
-    let filterVideo = (data: any) => {
-        if(2014 !== data.release_year || !data.artist.toLowerCase().includes(inputValue)) return false;
-        return true;
+    const passValue = (e: string) => {
+        dispatch(getInput(e));
     }
-
-    let videoResults = videos.filter(filterVideo).map(item => {
-        return (
-            <div key={item.id}>
-                <div>{item.id}</div>
-                <div>{item.artist}</div>
-                <div>{item.genre_id}</div>
-                <img src={item.image_url} alt={item.title}/>
-                <div>{item.release_year}</div>
-                <div>{item.title}</div>
-            </div>
-        )
-    })
 
     return (
         <div>
-            <input type="text" onChange={(e) => passInput(e.target.value)}/>
-            <div>{videoResults}</div>
+            <input type="text" onChange={(e) => passValue(e.target.value)}/>
+            <div>Search Input</div>
         </div>
     )
 }
+
+
+function mapStateToProps(state: any){
+    return {
+        genres: state.genreList,
+    }
+}
+
+
+const connector = connect(mapStateToProps);
+type InputProps = ConnectedProps<typeof connector>;
+export default connect(SearchInput);
