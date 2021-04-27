@@ -18,24 +18,34 @@ interface Genre {
 interface IProps {
     genreList?: Genre[];
     videoList?: Video[];
+    selectedGenres?: any;
     inputValue?: string;
+    selectedYear?: number;
 }
 
-export const SearchResult: React.FC<SearchResultProps | IProps> = ({ genreList, videoList, inputValue}) => {
-    console.log(videoList)
+export const SearchResult: React.FC<SearchResultProps | IProps> = ({videoList, inputValue, selectedGenres, selectedYear}) => {
+    const filterRequirements = (data: { release_year: any; artist: any; title: any; genre_id: any; }) => { 
+    return (selectedYear == null || selectedYear == 0 || data.release_year == selectedYear)
+            && (inputValue.trim() == '' || data.artist.toLowerCase().includes(inputValue.toLowerCase()) || data.title.toString().toLowerCase().includes(inputValue.toLowerCase()))
+            && (selectedGenres.length == 0 || selectedGenres.includes(data.genre_id));
+    }
     
-    // let test = videoList.filter((video: any) => video.artist.includes(inputValue));
-    // console.log(test)
+    const filteredVideos = videoList.filter(filterRequirements);
+
     return (
-        <div>SearchResult</div>
+        <div>{filteredVideos.map((item: { title: string; }, index: number) => (
+            <div key={index}>{item.title}</div>
+        ))}</div>
     )
 }
 
 const mapStateToProps = (state: any) => {
     return {
-        inputValue: state.videoList.inputValue || [],
+        inputValue: state.videoList.inputValue || "",
         genreList: state.videoList.genreList || [],
-        videoList: state.videoList.videoList || []
+        videoList: state.videoList.videoList || [],
+        selectedGenres: state.videoList.getGenresId || [],
+        selectedYear: state.videoList.selectedYear || []
     };
 }
 

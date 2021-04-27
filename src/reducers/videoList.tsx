@@ -3,29 +3,47 @@ import { types } from "../actions";
 const initialState = {
 	genreList: [],
     videoList: [],
+	selectedGenres: [],
+	genresId: [],
+	selectedYear: [],
 	inputValue: ""
 };
 
 export const videoList = (state = initialState, action: any) => {
 	switch(action.type) {
-	case types.GET_DATA: {
-		return {
-			...state,
-            genreList: [...state.genreList, action.data.genres],
-			videoList: [...state.videoList, action.data.videos]
-		};
-	}
-
-	case types.GET_INPUT_VALUE: {
-		return {
-			...state,
-			inputValue: action.value
+		case types.GET_DATA: {
+			return {
+				...state,
+				genreList: action.data.genres,
+				videoList: action.data.videos
+			};
 		}
-	}
 
-	default: 
-		return state;
-	}
+		case types.GET_INPUT_VALUE: {
+			return {
+				...state,
+				inputValue: action.value
+			}
+		}
+
+		case types.GET_GENRES: {
+			return {
+				...state,
+				selectedGenres: action.genre,
+				getGenresId: state.selectedGenres.map((genre: {value: string}) => genre.value)
+			}
+		}
+
+		case types.GET_YEAR: {
+			return {
+				...state,
+				selectedYear: action.year
+			}
+		}
+
+		default: 
+			return state;
+		}
 };
 
 export default videoList;

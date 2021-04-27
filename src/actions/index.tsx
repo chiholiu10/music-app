@@ -2,7 +2,7 @@ export const types = {
 	GET_DATA: "GET_DATA",
 	GET_GENRES: "GET_GENRES'",
 	GET_INPUT_VALUE: "GET_INPUT_VALUE",
-	GET_RELEASED_YEAR: "GET_RELEASED_YEAR"
+	GET_YEAR: "GET_YEAR"
 };
 
 export const getData = (data: any) => {
@@ -28,7 +28,7 @@ export const getGenres = (genre: string) => {
 
 export const getYear = (year: number) => {
 	return {
-		type: types.GET_RELEASED_YEAR,
+		type: types.GET_YEAR,
 		year
 	};
 };

@@ -1,7 +1,9 @@
 import React from "react";
-import { connect, ConnectedProps } from "react-redux";
+import { connect, ConnectedProps, useDispatch } from "react-redux";
+import { getGenres } from "../../actions/index";
+import Select from 'react-select'
 
-export interface Genre {
+interface Genre {
     id: number;
     name: string;
   }
@@ -19,17 +21,31 @@ interface IProps {
     genreList?: Genre[];
     videoList?: Video[];
     inputValue?: string;
+    genres?: Array<any>;
 }
 
-export const SearchGenres: React.FC<SearchResultProps | IProps> = ({ genreList }) => {
+export const SearchGenres: React.FC<SearchResultProps | IProps> = ({ genreList, genres }) => {
+    const selectOptions = genreList.map((genre: any) => ({ value: genre.id, label: genre.name }));
+    const dispatch = useDispatch();
+
+    const getGenreId = (data: any) => {
+        dispatch(getGenres(data))
+    }
+    
     return (
-        <div>SearchGenres</div>
+        <Select
+            closeMenuOnSelect={false}
+            isMulti
+            options={selectOptions}
+            onChange={getGenreId}
+        />
     )
 }
 
 const mapStateToProps = (state: any) => {
     return {
         genreList: state.videoList.genreList || [],
+        genres: state.videoList.selectedGenres || []
     };
 }
 
