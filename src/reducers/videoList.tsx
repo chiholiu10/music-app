@@ -2,14 +2,14 @@ import { types } from "../actions";
 
 const initialState = {
 	genreList: [],
-    videoList: [],
+	videoList: [],
 	selectedGenres: [],
 	selectedYear: [],
 	inputValue: ""
 };
 
 export const videoList = (state = initialState, action: any) => {
-	switch(action.type) {
+	switch (action.type) {
 		case types.GET_DATA: {
 			return {
 				...state,
@@ -22,26 +22,26 @@ export const videoList = (state = initialState, action: any) => {
 			return {
 				...state,
 				inputValue: action.value
-			}
+			};
 		}
 
 		case types.GET_GENRES: {
 			return {
 				...state,
 				selectedGenres: action.genre,
-			}
+			};
 		}
 
 		case types.GET_YEAR: {
 			return {
 				...state,
 				selectedYear: action.year
-			}
+			};
 		}
 
-		default: 
+		default:
 			return state;
-		}
+	}
 };
 
 export default videoList;

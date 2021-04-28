@@ -7,12 +7,12 @@ import SearchYear from './components/SearchYear/SearchYear';
 export const App = () => {
   return (
     <div className="App">
-      <SearchInput/>
-      <SearchGenres/>
-      <SearchYear/>
-      <SearchResult/>
+      <SearchInput />
+      <SearchGenres />
+      <SearchYear />
+      <SearchResult />
     </div>
   );
-}
+};
 
 export default App;
