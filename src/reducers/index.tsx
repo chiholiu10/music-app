@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import { videoList } from "./videoList";
+import { musicList } from "./musicList";
 
 export default combineReducers({
-	videoList
+  musicList
 });

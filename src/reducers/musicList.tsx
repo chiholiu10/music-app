@@ -8,7 +8,7 @@ const initialState = {
 	inputValue: ""
 };
 
-export const videoList = (state = initialState, action: any) => {
+export const musicList = (state = initialState, action: any) => {
 	switch (action.type) {
 		case types.GET_DATA: {
 			return {
@@ -44,4 +44,4 @@ export const videoList = (state = initialState, action: any) => {
 	}
 };
 
-export default videoList;
+export default musicList;

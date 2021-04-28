@@ -1,35 +1,15 @@
 import React from "react";
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { getGenres } from "../../actions/index";
+import { IProps } from '../../Interfaces/Interfaces';
 import Select from 'react-select';
 
-interface Genre {
-  id: number;
-  name: string;
-}
-
-interface Video {
-  id: number;
-  artist: string;
-  title: string;
-  release_year: number;
-  genre_id: number;
-  image_url: string;
-}
-
-interface IProps {
-  genreList?: Genre[];
-  videoList?: Video[];
-  inputValue?: string;
-  genres?: Array<any>;
-}
-
-export const SearchGenres: React.FC<SearchResultProps | IProps> = ({ genreList, genres }) => {
-  const selectOptions = genreList.map((genre: any) => ({ value: genre.id, label: genre.name }));
+export const SearchGenres: React.FC<SearchResultProps | IProps> = ({ genreList }) => {
+  const selectOptions = genreList.map((genre: { id: number; name: string; }) => ({ value: genre.id, label: genre.name }));
   const dispatch = useDispatch();
 
   const getGenreId = (data: any) => {
-    const newArray = data.map((element: any) => element.value);
+    const newArray = data.map(((element: { value: number; }) => element.value));
     dispatch(getGenres(newArray));
   };
 
@@ -45,8 +25,7 @@ export const SearchGenres: React.FC<SearchResultProps | IProps> = ({ genreList, 
 
 const mapStateToProps = (state: any) => {
   return {
-    genreList: state.videoList.genreList || [],
-    genres: state.videoList.selectedGenres || []
+    genreList: state.musicList.genreList || []
   };
 };
 

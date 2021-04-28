@@ -1,27 +1,6 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-
-interface Genre {
-  id: number;
-  name: string;
-}
-
-interface Video {
-  id: number;
-  artist: string;
-  title: string;
-  release_year: number;
-  genre_id: number;
-  image_url: string;
-}
-
-interface IProps {
-  genreList?: Genre[];
-  videoList?: Video[];
-  selectedGenres?: any;
-  inputValue?: string;
-  selectedYear?: number;
-}
+import { IProps } from '../../Interfaces/Interfaces';
 
 export const SearchResult: React.FC<SearchResultProps | IProps> = ({ videoList, inputValue, selectedGenres, selectedYear }) => {
   const filterRequirements = (data: { release_year: number; artist: string; title: string; genre_id: number; }) => {
@@ -41,11 +20,11 @@ export const SearchResult: React.FC<SearchResultProps | IProps> = ({ videoList, 
 
 const mapStateToProps = (state: any) => {
   return {
-    inputValue: state.videoList.inputValue || "",
-    genreList: state.videoList.genreList || [],
-    videoList: state.videoList.videoList || [],
-    selectedGenres: state.videoList.selectedGenres || [],
-    selectedYear: state.videoList.selectedYear || []
+    inputValue: state.musicList.inputValue || "",
+    genreList: state.musicList.genreList || [],
+    videoList: state.musicList.videoList || [],
+    selectedGenres: state.musicList.selectedGenres || [],
+    selectedYear: state.musicList.selectedYear || []
   };
 };
 

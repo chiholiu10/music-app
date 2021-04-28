@@ -3,9 +3,9 @@ module.exports = {
   "rules": {
     "indent": 'off',
     "consistent-return": 2,
-    "react/jsx-indent": ["error", "tab"],
     "semi": [2, "always"],
-    "no-mixed-spaces-and-tabs": 0
+    "no-mixed-spaces-and-tabs": 0,
+    "react/prop-types": "off"
   },
   "plugins": ['react'],
   "parser": "babel-eslint",

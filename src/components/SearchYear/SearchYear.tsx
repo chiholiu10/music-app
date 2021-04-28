@@ -2,32 +2,12 @@ import React from "react";
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { getYear } from "../../actions/index";
 import Select from 'react-select';
-
-interface Genre {
-  id: number;
-  name: string;
-}
-
-interface Video {
-  id: number;
-  artist: string;
-  title: string;
-  release_year: number;
-  genre_id: number;
-  image_url: string;
-}
-
-interface IProps {
-  genreList?: Genre[];
-  videoList?: Video[];
-  inputValue?: string;
-  genres?: Array<any>;
-}
+import { IProps } from '../../Interfaces/Interfaces';
 
 export const SearchYear: React.FC<SearchYearProps | IProps> = ({ videoList }) => {
   const dispatch = useDispatch();
 
-  let getAllYears = videoList.map(((video: { id: number; release_year: number; }) => ({ value: video.id, label: video.release_year }));
+  let getAllYears = videoList.map((video: any) => ({ value: video.id, label: video.release_year }));
   let labels = getAllYears.map((video: { label: string; }) => video.label);
   let removeDuplicates = getAllYears.filter(({ label }: any, index: number) => !labels.includes(label, index + 1));
   let ascendingYears = removeDuplicates.sort((a: { label: number; }, b: { label: number; }) => b.label - a.label);
@@ -45,7 +25,7 @@ export const SearchYear: React.FC<SearchYearProps | IProps> = ({ videoList }) =>
 
 const mapStateToProps = (state: any) => {
   return {
-    videoList: state.videoList.videoList || [],
+    videoList: state.musicList.videoList || [],
   };
 };
 

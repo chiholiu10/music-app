@@ -34,7 +34,7 @@ export const SearchInput: React.FC<InputProps> = () => {
 
 const mapStateToProps = (state: any) => {
   return {
-    inputValue: state.videoList.inputValue || []
+    inputValue: state.musicList.inputValue || []
   };
 };
 
