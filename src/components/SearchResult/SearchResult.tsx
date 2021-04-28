@@ -12,8 +12,12 @@ export const SearchResult: React.FC<SearchResultProps | IProps> = ({ videoList, 
   const filteredVideos = videoList.filter(filterRequirements);
 
   return (
-    <div>{filteredVideos.map((item: { title: string; }, index: number) => (
-      <div key={index}>{item.title}</div>
+    <div>{filteredVideos.map((item: { title: string; release_year: number; image_url: string; }, index: number) => (
+      <div key={index}>
+        <p>{item.title}</p>
+        <p>{item.release_year}</p>
+        <img src={item.image_url} alt={item.title} />
+      </div>
     ))}</div>
   );
 };
