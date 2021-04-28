@@ -24,8 +24,8 @@ interface IProps {
 }
 
 export const SearchResult: React.FC<SearchResultProps | IProps> = ({videoList, inputValue, selectedGenres, selectedYear}) => {
-    const filterRequirements = (data: { release_year: any; artist: any; title: any; genre_id: any; }) => { 
-    return (selectedYear == null || selectedYear == 0 || data.release_year == selectedYear)
+    const filterRequirements = (data: { release_year: number; artist: string; title: string; genre_id: number; }) => { 
+        return (selectedYear == null || selectedYear == 0 || data.release_year == selectedYear)
             && (inputValue.trim() == '' || data.artist.toLowerCase().includes(inputValue.toLowerCase()) || data.title.toString().toLowerCase().includes(inputValue.toLowerCase()))
             && (selectedGenres.length == 0 || selectedGenres.includes(data.genre_id));
     }
@@ -44,7 +44,7 @@ const mapStateToProps = (state: any) => {
         inputValue: state.videoList.inputValue || "",
         genreList: state.videoList.genreList || [],
         videoList: state.videoList.videoList || [],
-        selectedGenres: state.videoList.getGenresId || [],
+        selectedGenres: state.videoList.selectedGenres || [],
         selectedYear: state.videoList.selectedYear || []
     };
 }

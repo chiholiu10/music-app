@@ -4,7 +4,6 @@ const initialState = {
 	genreList: [],
     videoList: [],
 	selectedGenres: [],
-	genresId: [],
 	selectedYear: [],
 	inputValue: ""
 };
@@ -30,7 +29,6 @@ export const videoList = (state = initialState, action: any) => {
 			return {
 				...state,
 				selectedGenres: action.genre,
-				getGenresId: state.selectedGenres.map((genre: {value: string}) => genre.value)
 			}
 		}
 

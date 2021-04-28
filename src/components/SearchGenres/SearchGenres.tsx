@@ -29,12 +29,13 @@ export const SearchGenres: React.FC<SearchResultProps | IProps> = ({ genreList, 
     const dispatch = useDispatch();
 
     const getGenreId = (data: any) => {
-        dispatch(getGenres(data))
+        const newArray= data.map((element: any) => element.value);
+        dispatch(getGenres(newArray));
     }
     
     return (
         <Select
-            closeMenuOnSelect={false}
+            closeMenuOnSelect={true}
             isMulti
             options={selectOptions}
             onChange={getGenreId}
