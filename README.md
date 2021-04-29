@@ -1,4 +1,4 @@
-## How to get this on my local machine
+## How to get this running on my local machine
 
 ![Screen Shot 2021-04-29 at 23 53 58](https://user-images.githubusercontent.com/16224390/116623233-395af800-a946-11eb-823b-31c85f18d536.png)
 
