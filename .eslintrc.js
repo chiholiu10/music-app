@@ -8,7 +8,7 @@ module.exports = {
     "react/prop-types": "off"
   },
   "plugins": ['react'],
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 9,
     "ecmaFeatures": {

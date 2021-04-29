@@ -2,6 +2,7 @@ import React from "react";
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { getGenres } from "../../actions/index";
 import { IProps } from '../../Interfaces/Interfaces';
+import { SelectContainer } from "../../styles/General";
 import Select from 'react-select';
 
 export const SearchGenres: React.FC<SearchResultProps | IProps> = ({ genreList }) => {
@@ -12,14 +13,16 @@ export const SearchGenres: React.FC<SearchResultProps | IProps> = ({ genreList }
     const newArray = data.map(((element: { value: number; }) => element.value));
     dispatch(getGenres(newArray));
   };
-
   return (
-    <Select
-      closeMenuOnSelect={true}
-      isMulti
-      options={selectOptions}
-      onChange={getGenreId}
-    />
+    <SelectContainer>
+      <Select
+        id="react-select"
+        closeMenuOnSelect={true}
+        isMulti
+        options={selectOptions}
+        onChange={getGenreId}
+      />
+    </SelectContainer>
   );
 };
 

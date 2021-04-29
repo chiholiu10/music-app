@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect, useDispatch, ConnectedProps } from "react-redux";
 import { getData, getInput } from "../../actions/index";
+import { SearchBlock, Input } from './SearchInput.styles';
 import axios from "axios";
 
 export const SearchInput: React.FC<InputProps> = () => {
@@ -25,10 +26,9 @@ export const SearchInput: React.FC<InputProps> = () => {
   };
 
   return (
-    <div>
-      <input type="text" onChange={(e) => passValue(e.target.value)} />
-      <div>Search Input</div>
-    </div>
+    <SearchBlock>
+      <Input placeholder="Artists or songs" type="text" onChange={(e) => passValue(e.target.value)} />
+    </SearchBlock>
   );
 };
 

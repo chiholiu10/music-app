@@ -2,6 +2,7 @@ import React from "react";
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { getYear } from "../../actions/index";
 import Select from 'react-select';
+import { SelectContainer } from "../../styles/General";
 import { IProps } from '../../Interfaces/Interfaces';
 
 export const SearchYear: React.FC<SearchYearProps | IProps> = ({ videoList }) => {
@@ -16,10 +17,12 @@ export const SearchYear: React.FC<SearchYearProps | IProps> = ({ videoList }) =>
     dispatch(getYear(year.label));
   };
   return (
-    <Select
-      options={ascendingYears}
-      onChange={releaseYear}
-    />
+    <SelectContainer>
+      <Select
+        options={ascendingYears}
+        onChange={releaseYear}
+      />
+    </SelectContainer>
   );
 };
 

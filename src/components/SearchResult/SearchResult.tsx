@@ -1,5 +1,6 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
+import { Container, InnerContainer, Title, ReleaseYear, Image, Column } from "./SearchResult.styles";
 import { IProps } from '../../Interfaces/Interfaces';
 
 export const SearchResult: React.FC<SearchResultProps | IProps> = ({ videoList, inputValue, selectedGenres, selectedYear }) => {
@@ -12,13 +13,19 @@ export const SearchResult: React.FC<SearchResultProps | IProps> = ({ videoList, 
   const filteredVideos = videoList.filter(filterRequirements);
 
   return (
-    <div>{filteredVideos.map((item: { title: string; release_year: number; image_url: string; }, index: number) => (
-      <div key={index}>
-        <p>{item.title}</p>
-        <p>{item.release_year}</p>
-        <img src={item.image_url} alt={item.title} />
-      </div>
-    ))}</div>
+    <Container>
+      {filteredVideos.map((item: { title: string; release_year: number; image_url: string; }, index: number) => (
+        <InnerContainer key={index}>
+          <Column>
+            <Image src={item.image_url} alt={item.title} />
+          </Column>
+          <Column>
+            <Title>{item.title}</Title>
+            <ReleaseYear>{item.release_year}</ReleaseYear>
+          </Column>
+        </InnerContainer>
+      ))}
+    </Container>
   );
 };
 

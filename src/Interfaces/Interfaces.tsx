@@ -17,6 +17,8 @@ export interface IProps {
 	videoList?: Video[];
 	inputValue?: string;
 	genres?: Array<any>;
+	getAllYears?: Array<any>;
 	selectedGenres?: any;
 	selectedYear?: number;
+
 }
