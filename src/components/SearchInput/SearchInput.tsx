@@ -1,25 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect, useDispatch, ConnectedProps } from "react-redux";
-import { getData, getInput } from "../../actions/index";
+import { getInput } from "../../actions/index";
 import { SearchBlock, Input } from './SearchInput.styles';
-import axios from "axios";
 
 export const SearchInput: React.FC<InputProps> = () => {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json"
-        );
-        dispatch(getData(response.data));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, [dispatch]);
 
   const passValue = (e: string) => {
     dispatch(getInput(e));

@@ -24,9 +24,7 @@ In the project directory, you can run:
 * npm run start
 
 ### How the app works
-* First type in 'powerpuff girls' and click on the button to submit the form
-* Scroll down the page and click on an episode
-* Then the page will be redirected to the detail page
+* Type title in search input field, add genres or released year
 * Responsive design included 
 
 ### Check on linting error

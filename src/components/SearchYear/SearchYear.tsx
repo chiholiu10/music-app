@@ -10,7 +10,7 @@ export const SearchYear: React.FC<SearchYearProps | IProps> = ({ videoList }) =>
   const getAllYears = videoList.map((video: any) => ({ value: video.id, label: video.release_year }));
   let labels = getAllYears.map((video: { label: string; }) => video.label);
   let removeDuplicates = getAllYears.filter(({ label }: any, index: number) => !labels.includes(label, index + 1));
-  let ascendingYears = removeDuplicates.sort((a: { label: number; }, b: { label: number; }) => b.label - a.label);
+  let descendingYears = removeDuplicates.sort((a: { label: number; }, b: { label: number; }) => b.label - a.label);
 
   const releaseYear = (year: any) => {
     dispatch(getYear(year.label));
@@ -18,7 +18,7 @@ export const SearchYear: React.FC<SearchYearProps | IProps> = ({ videoList }) =>
   return (
     <SelectContainer>
       <Select
-        options={ascendingYears}
+        options={descendingYears}
         onChange={releaseYear}
       />
     </SelectContainer>
