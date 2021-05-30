@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { connect, useDispatch, ConnectedProps } from "react-redux";
 import { getInput } from "../../actions/index";
 import { SearchBlock, Input } from './SearchInput.styles';
@@ -25,4 +25,4 @@ const mapStateToProps = (state: any) => {
 
 const connector = connect(mapStateToProps);
 type InputProps = ConnectedProps<typeof connector>;
-export default connector(SearchInput);
+export default connector(memo(SearchInput));

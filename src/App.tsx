@@ -13,21 +13,21 @@ import axios from "axios";
 
 export const App: React.FC = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
-    const fetchData = async () => {
-      await axios.get(
-        "https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json"
-      ).then(response => {
-        dispatch(getData(response.data));
-      })
-        .catch(err => {
-          console.log(err);
-        });
 
+    const fetchData = async () => {
+
+      try {
+        const response = await axios.get(
+          "https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json"
+        );
+        dispatch(getData(response.data));
+      } catch (err) {
+        console.log(err);
+      }
     };
     fetchData();
-  }, []);
+  }, [dispatch]);
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyleReset />

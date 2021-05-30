@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { getGenres } from "../../actions/index";
 import { IProps } from '../../Interfaces/Interfaces';
@@ -34,4 +34,4 @@ const mapStateToProps = (state: any) => {
 
 const connector = connect(mapStateToProps);
 type SearchResultProps = ConnectedProps<typeof connector>;
-export default connector(SearchGenres);
+export default connector(memo(SearchGenres));

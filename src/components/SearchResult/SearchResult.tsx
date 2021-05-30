@@ -1,15 +1,21 @@
-import React from "react";
+import React, { FC, memo } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { Container, InnerContainer, Title, ReleaseYear, Image, Column } from "./SearchResult.styles";
 import { IProps } from '../../Interfaces/Interfaces';
 
-export const SearchResult: React.FC<SearchResultProps | IProps> = ({ videoList, inputValue, selectedGenres, selectedYear }) => {
+export const SearchResult: FC<SearchResultProps | IProps> = ({ videoList, inputValue, selectedGenres, selectedYear }) => {
+  let inputVal = inputValue.toLowerCase();
+
   const filterRequirements = (data: { release_year: number; artist: string; title: string; genre_id: number; }) => {
-    return (selectedYear == null || selectedYear == 0 || data.release_year == selectedYear)
-      && (inputValue.trim() == '' || data.artist.toLowerCase().includes(inputValue.toLowerCase()) || data.title.toString().toLowerCase().includes(inputValue.toLowerCase()))
-      && (selectedGenres.length == 0 || selectedGenres.includes(data.genre_id));
+    let dataArtist = data.artist.toLowerCase();
+    let dataTitle = data.title.toString().toLowerCase();
+    let firstCondition = selectedYear == null || selectedYear == 0 || data.release_year === selectedYear;
+    let secondCondition = inputValue.trim() == '' || dataArtist.indexOf(inputVal) > -1 || dataTitle.indexOf(inputVal) > -1;
+    let thirdCondition = selectedGenres.length === 0 || selectedGenres.indexOf(data.genre_id) > -1;
+    return firstCondition && secondCondition && thirdCondition;
   };
 
+  console.log(filterRequirements);
   const filteredVideos = videoList.filter(filterRequirements);
 
   return (
@@ -17,7 +23,7 @@ export const SearchResult: React.FC<SearchResultProps | IProps> = ({ videoList, 
       {filteredVideos.map((item: { title: string; release_year: number; image_url: string; }, index: number) => (
         <InnerContainer key={index}>
           <Column>
-            <Image src={item.image_url} alt={item.title} />
+            <Image src={item.image_url} alt={item.title} loading="lazy" />
           </Column>
           <Column>
             <Title>{item.title}</Title>
@@ -41,4 +47,4 @@ const mapStateToProps = (state: any) => {
 
 const connector = connect(mapStateToProps);
 type SearchResultProps = ConnectedProps<typeof connector>;
-export default connector(SearchResult);
+export default connector(memo(SearchResult));

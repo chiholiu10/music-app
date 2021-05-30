@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { getYear } from "../../actions/index";
 import Select from 'react-select';
@@ -33,4 +33,4 @@ const mapStateToProps = (state: any) => {
 
 const connector = connect(mapStateToProps);
 type SearchYearProps = ConnectedProps<typeof connector>;
-export default connector(SearchYear);
+export default connector(memo(SearchYear));
