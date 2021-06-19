@@ -1,20 +1,21 @@
-import React, { memo } from "react";
+import { FC, memo, useCallback } from "react";
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { getYear } from "../../actions/index";
 import Select from 'react-select';
 import { SelectContainer } from "../../styles/General";
-import { IProps } from '../../Interfaces/Interfaces';
+import { IProps } from '../../Types/Types';
 
-export const SearchYear: React.FC<SearchYearProps | IProps> = ({ videoList }) => {
+export const SearchYear: FC<SearchYearProps | IProps> = ({ videoList }) => {
   const dispatch = useDispatch();
   const getAllYears = videoList.map((video: any) => ({ value: video.id, label: video.release_year }));
   let labels = getAllYears.map((video: { label: string; }) => video.label);
   let removeDuplicates = getAllYears.filter(({ label }: any, index: number) => !labels.includes(label, index + 1));
   let descendingYears = removeDuplicates.sort((a: { label: number; }, b: { label: number; }) => b.label - a.label);
 
-  const releaseYear = (year: any) => {
+  const releaseYear = useCallback((year: any) => {
     dispatch(getYear(year.label));
-  };
+  }, []);
+
   return (
     <SelectContainer>
       <Select

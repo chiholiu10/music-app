@@ -5,7 +5,8 @@ module.exports = {
     "consistent-return": 2,
     "semi": [2, "always"],
     "no-mixed-spaces-and-tabs": 0,
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off"
   },
   "plugins": ['react'],
   "parser": "@typescript-eslint/parser",

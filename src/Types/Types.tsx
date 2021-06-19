@@ -20,5 +20,9 @@ export interface IProps {
 	getAllYears?: Array<any>;
 	selectedGenres?: any;
 	selectedYear?: number;
+}
 
+export interface LazyLoaderProps {
+	src: string;
+	alt: string;
 }

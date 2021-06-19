@@ -16,24 +16,9 @@ export const InnerContainer = styled.div`
     border-radius: 5px;
     max-width: 500px;
     flex-direction: row;
+    height: 140px;
     margin-left: auto;
     margin-right: auto;
-  `}
-`;
-
-export const Column = styled.div`
-  &:last-child {
-    display: flex;          
-    flex-direction: column;  
-    justify-content: center;    
-    padding: 12px 20px 18px;
-  }
-  ${breakpoint.sm`
-    flex: 0 50%;
-    &:last-child {
-      align-items: center; 
-      padding: 0;
-    }
   `}
 `;
 
@@ -55,6 +40,18 @@ export const ReleaseYear = styled.p`
   `}
 `;
 
-export const Image = styled.img`
-    width: 100%;
+export const Column = styled.div`
+  &:last-child {
+    display: flex;          
+    flex-direction: column;  
+    justify-content: center;    
+    padding: 12px 20px 18px;
+  }
+  ${breakpoint.sm`
+    flex: 0 50%;
+    &:last-child {
+      align-items: center; 
+      padding: 0;
+    }
+  `}
 `;

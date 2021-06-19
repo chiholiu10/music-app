@@ -1,11 +1,11 @@
-import React, { memo } from "react";
+import { FC, memo } from "react";
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { getGenres } from "../../actions/index";
-import { IProps } from '../../Interfaces/Interfaces';
+import { IProps } from '../../Types/Types';
 import { SelectContainer } from "../../styles/General";
 import Select from 'react-select';
 
-export const SearchGenres: React.FC<SearchResultProps | IProps> = ({ genreList }) => {
+export const SearchGenres: FC<SearchResultProps | IProps> = ({ genreList }) => {
   const selectOptions = genreList.map((genre: { id: number; name: string; }) => ({ value: genre.id, label: genre.name }));
   const dispatch = useDispatch();
 
@@ -13,6 +13,7 @@ export const SearchGenres: React.FC<SearchResultProps | IProps> = ({ genreList }
     const newArray = data.map(((element: { value: number; }) => element.value));
     dispatch(getGenres(newArray));
   };
+
   return (
     <SelectContainer>
       <Select

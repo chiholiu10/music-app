@@ -9,24 +9,23 @@ import { ThemeProvider } from "styled-components";
 import { getData } from "./actions/index";
 import { Block } from './styles/General';
 import theme from "./styles/Themes";
-import axios from "axios";
 
 export const App: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-
-    const fetchData = async () => {
-
-      try {
-        const response = await axios.get(
-          "https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json"
-        );
-        dispatch(getData(response.data));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
+    fetch("https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json")
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        // history.push({
+        //   pathname: '/404'
+        // });
+        throw response;
+      })
+      .then(data => {
+        dispatch(getData(data));
+      });
   }, [dispatch]);
   return (
     <ThemeProvider theme={theme}>
